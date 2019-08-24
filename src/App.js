@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import queryString from "query-string";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.securedImages = [
+      "https://cdn.weka-fachmedien.de/thumbs/fileadmin/images/2012/04/Norton_Secured_Seal_Logo.jpg.774x420.jpg",
+      "https://thecomputerfriend.net/wp-content/uploads/2015/05/virus.png"
+    ];
+    this.securedImage = this.securedImages[
+      Math.round(Math.random() * (this.securedImages.length - 1))
+    ];
+    this.options = queryString.parse(window.location.search);
+  }
+  render() {
+    return (
+      <div className="App">
+        <div>
+          <h1>{this.options.name}</h1>
+          <div className="App-centered">
+            <form>
+              <input type="text" placeholder="Client id" />
+              <input type="password" placeholder="Password" />
+              <input type="submit" value="Sign in" />
+            </form>
+          </div>
+          <img src={this.securedImage} class="App-secure" />
+          <div className="App-debug">{JSON.stringify(this.options)}</div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;

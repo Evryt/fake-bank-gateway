@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import queryString from "query-string";
+import sha256 from "sha256";
 
 class App extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div>
+        <div className="App-container">
           <h1>{this.options.name}</h1>
           <h2>SAFE OPENID GATEWAY 100% LEGIT</h2>
           {this.state.loggedIn ? (
@@ -59,11 +60,13 @@ class App extends React.Component {
               </form>
             </div>
           )}
-          <img src={this.securedImage} className="App-secure" alt="secured" />
-          <div className="App-debug">{JSON.stringify(this.options)}</div>
-          Friendly reminder: watch out for fake Fake Bank phishing sites, they
-          often look 100% like this one, so be prepared{" "}
-          {JSON.stringify(this.state.debug)}
+          <div>
+            <img src={this.securedImage} className="App-secure" alt="secured" />
+          </div>
+          <div>
+            Friendly reminder: watch out for fake Fake Bank phishing sites, they
+            often look 100% like this one, so be prepared
+          </div>
         </div>
       </div>
     );
@@ -78,14 +81,14 @@ class App extends React.Component {
         },
         body: JSON.stringify({
           clientID: this.state.clientid,
-          passwordHash: this.state.password
+          passwordHash: sha256(this.state.password)
         })
       }
     ).then(res => res.json());
     if (!response.error) {
       this.setState({ loggedIn: true });
     } else {
-      alert("Error: " + response.error);
+      alert("Error: " + JSON.stringify(response));
     }
   }
 }

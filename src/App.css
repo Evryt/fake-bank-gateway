@@ -6,6 +6,8 @@
   align-items: center;
   height: 100vh;
   background-image: url(https://media.istockphoto.com/vectors/technology-shield-securityprotection-and-safe-concepton-light-blue-vector-id1066540702);
+
+  background-size: 80%;
 }
 
 .App div {
@@ -17,6 +19,20 @@
   padding: 10px;
   width: 200px;
   margin: 10px;
+  font-size: 18px;
+}
+
+.App h1 {
+  color: cyan;
+}
+
+.App h2 {
+  color: gold;
+}
+
+.App-result {
+  color: red;
+  font-size: 32px;
 }
 
 .App-secure {
@@ -24,6 +40,6 @@
 }
 
 .App-debug {
-  padding: 20px;
+  margin-top: 20px;
   color: grey;
 }

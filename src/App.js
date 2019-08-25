@@ -163,6 +163,7 @@ class App extends React.Component {
     }
   }
   async pushSessionToApp(tmpCode) {
+    alert(this.options.redirect + "/" + this.options.appid + "/" + tmpCode);
     const response = await fetch(
       this.options.redirect + "/" + this.options.appid + "/" + tmpCode,
       {

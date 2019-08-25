@@ -157,20 +157,21 @@ class App extends React.Component {
     if (!response.error) {
       this.setState({ authorized: true });
       alert(JSON.stringify(response));
-      this.pushSessionToApp(response.tmpCode);
+      this.pushSessionToApp(response.tmpCode, accountID);
     } else {
       alert("Error: " + JSON.stringify(response));
     }
   }
-  async pushSessionToApp(tmpCode) {
-    alert(this.options.redirect + "/" + this.options.appid + "/" + tmpCode);
+  async pushSessionToApp(tmpCode, accountID) {
+    alert(accountID);
     const response = await fetch(
       this.options.redirect + "/" + this.options.appid + "/" + tmpCode,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          session: this.options.session
+          session: this.options.session,
+          accountID: "" + accountID
         }
       }
     ).then(res => res.json());
